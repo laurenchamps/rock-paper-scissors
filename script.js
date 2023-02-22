@@ -27,28 +27,37 @@ function getPlayerChoice() {
     return playerChoice;
 }
 
+let playerScore = 0;
+let computerScore = 0;
+
 //Get result of player selection vs computer selection and return an alert with the message of who won.
 function playRound(playerSelection, computerSelection) {
     let result;
 
     if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
-        result = `You win! Rock beats Scissors`;
+        result = `You win! ${playerSelection} beats ${computerSelection.toLowerCase()}`;
+        playerScore += 1;
     } else if (playerSelection === 'Rock' && computerSelection === 'Paper') {
-        result =  `You lose! Paper beats Rock.`;
+        result =  `You lose! ${computerSelection} beats ${playerSelection.toLowerCase()}.`;
+        computerScore += 1;
     } else if (playerSelection === 'Scissors' && computerSelection === 'Paper') {
-        result =  `You win! Scissors beats Paper.`;
+        result =  `You win! ${playerSelection} beats ${computerSelection.toLowerCase()}.`;
+        playerScore += 1;
     } else if (playerSelection === 'Scissors' && computerSelection === 'Rock') {
-        result = `You lose! Rock beats Scissors.`;
+        result = `You lose! ${computerSelection} beats ${playerSelection.toLowerCase()}.`;
+        computerScore += 1;
     } else if (playerSelection === 'Paper' && computerSelection === 'Rock') {
-        result =  `You win! Paper beats Rock.`;
+        result =  `You win! ${playerSelection} beats ${computerSelection.toLowerCase()}.`;
+        playerScore += 1;
     } else if (playerSelection === 'Paper' && computerSelection === 'Scissors') {
-        result = `You lose! Scissors beats Paper.`;
+        result = `You lose! ${computerSelection} beats ${playerSelection.toLowerCase()}.`;
+        computerScore += 1;
     } else if (playerSelection === computerSelection) {
         result = 'It\'s a tie!'
     } else {
         result = 'Something went wrong'
     }
-    // console.log(result);
+
     return result;
 }
 
@@ -63,12 +72,23 @@ for (let i = 0; i < 5; i++) {
 
     const currentRound = playRound(playerSelection, computerSelection);
 
-    console.log(`Player selected ${playerSelection}`);
-    console.log(`Computer selected ${computerSelection}`);
+    console.log(`You played ${playerSelection.toLowerCase()} and computer played ${computerSelection.toLowerCase()}.`);
     console.log(currentRound);
-
-
+    console.log(`Player: ${playerScore}`);
+    console.log(`Computer: ${computerScore}`);
     }
 }
   
 game();
+
+let finalResult;
+
+if (playerScore > computerScore) {
+    finalResult = 'You are the champion!';
+} else if (playerScore < computerScore) {
+    finalResult = 'Outwitted by a machine, eh? Better luck next time.'
+} else {
+    finalResult = 'It\'s all square at the end of the game. Everyone wins!';
+}
+
+console.log(finalResult);
