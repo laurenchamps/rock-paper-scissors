@@ -1,13 +1,10 @@
-function getComputerChoice () {
-    
-    //set options for play
-    const playOptions = ['Rock', 'Paper', 'Scissors'];
-    
-    //get random index value
-    const randomIndex = Math.floor(Math.random() * playOptions.length);
+ //set options for play
+const playOptions = ['Rock', 'Paper', 'Scissors'];
 
-    //get random item
-    return playOptions[randomIndex];
+//Select a random option for the computer to play
+function getComputerChoice () {
+    const choice = playOptions[Math.floor(Math.random() * playOptions.length)];
+    return choice;
 }
 
 function getPlayerChoice() {
@@ -30,34 +27,24 @@ function getPlayerChoice() {
 let playerScore = 0;
 let computerScore = 0;
 
-//Get result of player selection vs computer selection and return an alert with the message of who won.
+//Get result of player selection vs computer selection and return an alert 
+// with the message of who won.
 function playRound(playerSelection, computerSelection) {
     let result;
 
-    if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
+    if (playerSelection === computerSelection) {
+        result = 'It\'s a tie!'
+    } else if (
+        (playerSelection === 'Rock' && computerSelection === 'Scissors') || 
+        (playerSelection === 'Paper' && computerSelection === 'Rock') || 
+        (playerSelection === 'Scissors' && computerSelection === 'Paper')
+    ) {
         result = `You win! ${playerSelection} beats ${computerSelection.toLowerCase()}`;
         playerScore += 1;
-    } else if (playerSelection === 'Rock' && computerSelection === 'Paper') {
-        result =  `You lose! ${computerSelection} beats ${playerSelection.toLowerCase()}.`;
-        computerScore += 1;
-    } else if (playerSelection === 'Scissors' && computerSelection === 'Paper') {
-        result =  `You win! ${playerSelection} beats ${computerSelection.toLowerCase()}.`;
-        playerScore += 1;
-    } else if (playerSelection === 'Scissors' && computerSelection === 'Rock') {
-        result = `You lose! ${computerSelection} beats ${playerSelection.toLowerCase()}.`;
-        computerScore += 1;
-    } else if (playerSelection === 'Paper' && computerSelection === 'Rock') {
-        result =  `You win! ${playerSelection} beats ${computerSelection.toLowerCase()}.`;
-        playerScore += 1;
-    } else if (playerSelection === 'Paper' && computerSelection === 'Scissors') {
-        result = `You lose! ${computerSelection} beats ${playerSelection.toLowerCase()}.`;
-        computerScore += 1;
-    } else if (playerSelection === computerSelection) {
-        result = 'It\'s a tie!'
     } else {
-        result = 'Something went wrong'
-    }
-
+        result = `You lose. ${computerSelection} beats ${playerSelection.toLowerCase()}`;
+        computerScore += 1;
+    };
     return result;
 }
 
@@ -67,7 +54,8 @@ for (let i = 0; i < 5; i++) {
     // Input player selection
     const playerSelection = getPlayerChoice();
     
-    //Get one of the three play options (rock, paper or scissors) at random for computer's play
+    //Get one of the three play options (rock, paper or scissors) at 
+    //random for computer's play
     const computerSelection = getComputerChoice();
 
     const currentRound = playRound(playerSelection, computerSelection);
