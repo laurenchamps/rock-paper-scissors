@@ -73,9 +73,9 @@ div.result {
     text-align: center;
     font-size: 2.5rem;
     line-height: 1.5;
-    background-color: #1b2dce;
-    color: #fff;
-    border: none;
+    background-color: #fff;
+    color: #000;
+    border: 10px dotted #2715eb;
 }
 
 .reload:hover {
