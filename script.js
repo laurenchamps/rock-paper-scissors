@@ -1,57 +1,46 @@
  //set options for play
 const playOptions = ['rock', 'paper', 'scissors'];
+let playerScore = 0;
+let computerScore = 0;
+let resultDiv = document.querySelector('div.result');
+
 
 //Select a random option for the computer to play
 function getComputerChoice () {
     return playOptions[Math.floor(Math.random() * playOptions.length)];
 }
 
-const buttons = document.querySelectorAll('button');
+const btns = document.querySelectorAll('button');
 
-buttons.forEach(button => button.addEventListener('click', e => {
-    if (e.target.id === 'rock') {
-        console.log('rock');
-    } else if (e.target.id === 'paper') {
-        console.log('paper');
-    } else if (e.target.id === 'scissors') {
-        console.log('scissors');
-    }
-}));
+btns.forEach(btn => btn.addEventListener('click', playGame));
 
-// function getPlayerChoice(e) {
-//     // let choice = document.querySelector(`#${e.srcElement.id}`);
-//     if (e.target.id === 'rock');
-//     return 'rock';
-// }
+function playGame(e) {
+    const move = document.querySelector(`button#${e.target.id}`);
+    const playerSelection = move.id;
+    const computerSelection = getComputerChoice();
 
-// const playerSelection = getPlayerChoice();
-// console.log(playerSelection);
-// const computerSelection = getComputerChoice();
-// console.log(computerSelection);
+    playRound(playerSelection, computerSelection);
+}
 
-// let playerScore = 0;
-// let computerScore = 0;
+//Get result of player selection vs computer selection and return an alert 
+// with the message of who won.
+function playRound(playerSelection, computerSelection) {
+    let result;
 
-// //Get result of player selection vs computer selection and return an alert 
-// // with the message of who won.
-// function playRound(playerSelection, computerSelection) {
-//     let result;
-
-//     if (playerSelection === computerSelection) {
-//         result = console.log('Tie');
-//     } else if (
-//         (playerSelection === 'rock' && computerSelection === 'scissors') || 
-//         (playerSelection === 'paper' && computerSelection === 'rock') || 
-//         (playerSelection === 'scissors' && computerSelection === 'paper')
-//     ) {
-//         result = console.log('Player wins');
-//         playerScore += 1;
-//     } else {
-//         result = console.log('Computer wins');
-//         computerScore += 1;
-//     };
-//     return result;
-// }
+    if (playerSelection === computerSelection) {
+        resultDiv.textContent = 'It\'s a tie';
+    } else if (
+        (playerSelection === 'rock' && computerSelection === 'scissors') || 
+        (playerSelection === 'paper' && computerSelection === 'rock') || 
+        (playerSelection === 'scissors' && computerSelection === 'paper')
+    ) {
+        resultDiv.textContent = 'You win!';
+        playerScore += 1;
+    } else {
+        resultDiv.textContent = 'Computer wins';
+        computerScore += 1;
+    };
+}
 
 // function game() {
 //     const playerSelection = getPlayerChoice();
