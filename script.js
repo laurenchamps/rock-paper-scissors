@@ -1,54 +1,73 @@
  //set options for play
-const playOptions = ['rock', 'paper', 'scissors'];
+const playOptions = ['Rock', 'Paper', 'Scissors'];
 let playerScore = 0;
 let computerScore = 0;
+
+const rpsBtns = document.querySelectorAll('.rpsBtn');
 let resultDiv = document.querySelector('div.result');
-let playerScoreboard = document.querySelector('div.playerScore');
-let computerScoreboard = document.querySelector('div.computerScore');
+let playerScoreboard = document.querySelector('.playerScore');
+let computerScoreboard = document.querySelector('.computerScore');
 
 
 //Select a random option for the computer to play
 function getComputerChoice () {
-    return playOptions[Math.floor(Math.random() * playOptions.length)];
+    return computerSelection = playOptions[Math.floor(Math.random() * playOptions.length)];
 }
 
-const btns = document.querySelectorAll('button');
+function playGame() {
+    rpsBtns.forEach(btn => btn.addEventListener('click', () => {
+        const playerSelection = btn.id;
 
-btns.forEach(btn => btn.addEventListener('click', playGame));
+        const computerSelection = getComputerChoice();
 
-function playGame(e) {
-    const move = document.querySelector(`button#${e.target.id}`);
-    const playerSelection = move.id;
-    const computerSelection = getComputerChoice();
-
-    playRound(playerSelection, computerSelection);
+        playRound(playerSelection, computerSelection);
+    }));
 }
 
 //Get result of player selection vs computer selection and return an alert 
 // with the message of who won.
 function playRound(playerSelection, computerSelection) {
 
-    if (playerSelection === computerSelection) {
-        resultDiv.textContent = 'It\'s a tie';
+    if (playerSelection === computerSelection.toLowerCase()) {
+        resultDiv.textContent = 'It\'s a tie.';
     } else if (
-        (playerSelection === 'rock' && computerSelection === 'scissors') || 
-        (playerSelection === 'paper' && computerSelection === 'rock') || 
-        (playerSelection === 'scissors' && computerSelection === 'paper')
+        (playerSelection === 'rock' && computerSelection.toLowerCase() === 'scissors') || 
+        (playerSelection === 'paper' && computerSelection.toLowerCase() === 'rock') || 
+        (playerSelection === 'scissors' && computerSelection.toLowerCase() === 'paper')
     ) {
-        resultDiv.textContent = `You win. ${playerSelection} beats ${computerSelection}`;
+        resultDiv.textContent = `You win. ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)} beats ${computerSelection.toLowerCase()}.`;
         playerScore += 1;
         playerScoreboard.textContent = `Player: ${playerScore}`;
-        if (playerScore === 5) {
-            resultDiv.textContent = `GAME OVER. You win!`;
-            btns.forEach(btn => btn.removeEventListener('click', playGame));
-        };
     } else {
-        resultDiv.textContent = `Computer wins. ${computerSelection} beats ${playerSelection}`;
+        resultDiv.textContent = `Computer wins. ${computerSelection} beats ${playerSelection}.`;
         computerScore += 1;
         computerScoreboard.textContent = `Computer: ${computerScore}`;
-        if (computerScore === 5) {
-            resultDiv.textContent = 'GAME OVER. Computer wins.';
-            btns.forEach(btn => btn.removeEventListener('click', playGame));
-        }
     };
+    finalResult(playerScore, computerScore);
 }
+
+function finalResult (playerScore, computerScore) {
+    const winModal = document.querySelector('dialog.playerWins');
+    const loseModal = document.querySelector('dialog.computerWins');
+    const playAgain = document.querySelectorAll('.reload');
+
+    if (playerScore === 5) {
+        winModal.showModal();
+        gameOver();
+    } else if (computerScore === 5) {
+        loseModal.showModal();
+        loseModal.style.backgroundColor = '#D9230D';
+        gameOver();
+    };
+
+    playAgain.forEach(play => play.addEventListener('click', () => {
+        window.location.reload();
+    }));
+}
+
+function gameOver () {
+    rpsBtns.forEach(btn => btn.disabled = true);
+}
+
+playGame();
+finalResult();

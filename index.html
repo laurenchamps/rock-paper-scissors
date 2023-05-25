@@ -5,15 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css" class="css">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Press+Start+2P&display=swap" rel="stylesheet">
     <script src="script.js" defer></script>
+    <script src="https://kit.fontawesome.com/01b2390a4f.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Rock Paper Scissors</h1>
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
-    <div class="result"></div>
-    <div class="playerScore">Player: </div>
-    <div class="computerScore">Computer: </div>
+    <div class="container">
+        <h1>Rock Paper Scissors</h1>
+        <div class="intro">
+            <p>Rock blunts scissors.</p>
+            <p>Paper smothers rock.</p>
+            <p>Scissors cut paper.</p>
+            <p class="prompt">Challenge the computer. First to 5 wins.</p>
+        </div>
+        <dialog class="modal playerWins">
+            <p>YOU WIN!</p>
+            <p class="reload">Play again</p>
+        </dialog>
+        <dialog class="modal computerWins">
+            <p>GAME OVER</p>
+            <p class="reload">Play again</p>
+        </dialog>
+        <div class="buttons">
+            <button id="rock" class="rpsBtn">
+                <p>Rock</p>
+                <i class="fa-regular fa-hand-back-fist fa-5x"></i>
+            </button>
+            <button id="paper" class="rpsBtn">
+                <p>Paper</p>
+                <i class="fa-regular fa-hand fa-5x"></i>
+            </button>
+            <button id="scissors" class="rpsBtn">
+                <p>Scissors</p>
+                <i class="fa-regular fa-hand-scissors fa-5x"></i>
+            </button>
+        </div>
+        <div class="scoreboard">
+            <div>
+                <p class="playerScore">Player: </p>
+            </div>
+            <div>
+                <p class="computerScore">Computer: </p>
+            </div>
+        </div>
+        <div class="result"></div>
+    </div>
 </body>
 </html>
