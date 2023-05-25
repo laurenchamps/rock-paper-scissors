@@ -3,6 +3,8 @@ const playOptions = ['rock', 'paper', 'scissors'];
 let playerScore = 0;
 let computerScore = 0;
 let resultDiv = document.querySelector('div.result');
+let playerScoreboard = document.querySelector('div.playerScore');
+let computerScoreboard = document.querySelector('div.computerScore');
 
 
 //Select a random option for the computer to play
@@ -25,7 +27,6 @@ function playGame(e) {
 //Get result of player selection vs computer selection and return an alert 
 // with the message of who won.
 function playRound(playerSelection, computerSelection) {
-    let result;
 
     if (playerSelection === computerSelection) {
         resultDiv.textContent = 'It\'s a tie';
@@ -34,54 +35,20 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === 'paper' && computerSelection === 'rock') || 
         (playerSelection === 'scissors' && computerSelection === 'paper')
     ) {
-        resultDiv.textContent = 'You win!';
+        resultDiv.textContent = `You win. ${playerSelection} beats ${computerSelection}`;
         playerScore += 1;
+        playerScoreboard.textContent = `Player: ${playerScore}`;
+        if (playerScore === 5) {
+            resultDiv.textContent = `GAME OVER. You win!`;
+            btns.forEach(btn => btn.removeEventListener('click', playGame));
+        };
     } else {
-        resultDiv.textContent = 'Computer wins';
+        resultDiv.textContent = `Computer wins. ${computerSelection} beats ${playerSelection}`;
         computerScore += 1;
+        computerScoreboard.textContent = `Computer: ${computerScore}`;
+        if (computerScore === 5) {
+            resultDiv.textContent = 'GAME OVER. Computer wins.';
+            btns.forEach(btn => btn.removeEventListener('click', playGame));
+        }
     };
 }
-
-// function game() {
-//     const playerSelection = getPlayerChoice();
-//     const computerSelection = getComputerChoice();
-
-//     playRound(playerSelection, computerSelection);
-//     console.log(`Player: ${playerScore}`);
-//     console.log(`Computer: ${computerScore}`);
-// }
-
-
-
-// //Play 5 rounds of game
-// // function game() {
-// //  {
-// //     // // Input player selection
-// //     // const playerSelection = getPlayerChoice();
-    
-// //     // //Get one of the three play options (rock, paper or scissors) at 
-//     // //random for computer's play
-//     // const computerSelection = getComputerChoice();
-
-//     // const currentRound = playRound(playerSelection, computerSelection);
-
-    
-//     // console.log(currentRound);
-// //     console.log(`Player: ${playerScore}`);
-// //     console.log(`Computer: ${computerScore}`);
-// //     }
-// // }
-  
-// // game();
-
-// // let finalResult;
-
-// // if (playerScore > computerScore) {
-// //     finalResult = 'You are the champion!';
-// // } else if (playerScore < computerScore) {
-// //     finalResult = 'Outwitted by a machine, eh? Better luck next time.'
-// // } else {
-// //     finalResult = 'It\'s all square at the end of the game. Everyone wins!';
-// // }
-
-// // console.log(finalResult);
