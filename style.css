@@ -19,7 +19,8 @@ body {
 h1 {
     font-family: 'Bungee Shade', cursive;
     font-size: 5rem;
-    color: #26de1f;
+    /* color: #26de1f; */
+    color: #efaa08;
 }
 
 .intro {
@@ -55,8 +56,8 @@ button:hover {
 }
 
 .scoreboard {
-    display: flex;
-    justify-content: center;
+    /* display: flex; */
+    /* justify-content: center; */
     gap: 4em;
     font-size: 1.5rem;
     /* margin: 0em 1.2em; */
@@ -101,5 +102,15 @@ div.result {
 @media (min-width: 800px) {
     .buttons {
         display: flex;
+    }
+
+    h1 {
+        font-size: 5rem;
+    }
+
+    .scoreboard {
+        display: flex;
+        justify-content: center;
+        gap: 4em;
     }
 }
