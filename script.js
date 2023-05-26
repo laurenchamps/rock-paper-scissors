@@ -56,7 +56,6 @@ function finalResult (playerScore, computerScore) {
         gameOver();
     } else if (computerScore === 5) {
         loseModal.showModal();
-        loseModal.style.border = '10px dotted #e23838'
         gameOver();
     };
 
